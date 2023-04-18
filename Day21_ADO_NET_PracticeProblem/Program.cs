@@ -12,7 +12,8 @@ namespace Day21_ADO_NET_PracticeProblem
         {
             Console.WriteLine("Welcome to Day 21 ADO.NET Practice problem");
             Console.WriteLine("Select any one Option for \n" +
-                "1. Add customer details into customer table");
+                "1. Add customer details into customer table\n" +
+                "2. Get all customers details");
             int option = Convert.ToInt32(Console.ReadLine());
             switch (option)
             {
@@ -30,6 +31,11 @@ namespace Day21_ADO_NET_PracticeProblem
                     customer.Salary = Convert.ToInt64(Console.ReadLine());
 
                     CustomerRepo.AddCustomer(customer);
+                    break;
+
+                case 2:
+                    CustomerRepo.GetAllCustomer();
+
                     break;
                 default:
                     Console.WriteLine("Please Select Correct Option");

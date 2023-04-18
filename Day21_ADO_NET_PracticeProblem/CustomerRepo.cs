@@ -35,5 +35,29 @@ namespace Day21_ADO_NET_PracticeProblem
                 Console.WriteLine("Something went Wrong");
             }
         }
+
+        public static void GetAllCustomer()
+        {
+            Customer customer = new Customer();
+            SqlConnection sqlConnection = new SqlConnection(connectionString);
+            string query = "select * from Customer";
+            SqlCommand cmd = new SqlCommand(query, sqlConnection);
+            sqlConnection.Open();
+            SqlDataReader reader = cmd.ExecuteReader();
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    customer.Id = Convert.ToInt32(reader["Id"] == DBNull.Value ? default : reader["Id"]);
+                    customer.Name = (reader["Name"] == DBNull.Value ? default : reader["Name"]).ToString();
+                    customer.City = (reader["City"] == DBNull.Value ? default : reader["City"]).ToString();
+                    customer.Address = (reader["Address"] == DBNull.Value ? default : reader["Address"]).ToString();
+                    customer.Phone = (int)Convert.ToInt64(reader["MobileNumber"] == DBNull.Value ? default : reader["MobileNumber"]);
+                    customer.Salary = (int)Convert.ToInt64(reader["Salary"] == DBNull.Value ? default : reader["Salary"]);
+
+                    Console.WriteLine(customer.Id + "\n" + customer.Name + "\n" + customer.City + "\n" + customer.Address + "\n" + customer.Phone + "\n" + customer.Salary);
+                }
+            }
+        }
     }
 }
