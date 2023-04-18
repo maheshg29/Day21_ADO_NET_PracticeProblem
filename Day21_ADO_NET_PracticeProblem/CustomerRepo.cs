@@ -79,5 +79,27 @@ namespace Day21_ADO_NET_PracticeProblem
                 Console.WriteLine("Something went Wrong in Delete Customer");
             }
         }
+
+        public static void UpdateCustomer(Customer model)
+        {
+
+            SqlConnection sqlConnection = new SqlConnection(connectionString);
+
+            SqlCommand cmd = new SqlCommand("spUpdateSalary", sqlConnection);
+            cmd.CommandType = CommandType.StoredProcedure;
+            sqlConnection.Open();
+            cmd.Parameters.AddWithValue("@Name", model.Name);
+            cmd.Parameters.AddWithValue("@Salary", model.Salary);
+
+            int num = cmd.ExecuteNonQuery();
+            if (num != 0)
+            {
+                Console.WriteLine("Customer Update Successfully");
+            }
+            else
+            {
+                Console.WriteLine("Something went Wrong in Update Customer");
+            }
+        }
     }
 }
