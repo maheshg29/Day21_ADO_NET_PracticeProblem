@@ -13,7 +13,8 @@ namespace Day21_ADO_NET_PracticeProblem
             Console.WriteLine("Welcome to Day 21 ADO.NET Practice problem");
             Console.WriteLine("Select any one Option for \n" +
                 "1. Add customer details into customer table\n" +
-                "2. Get all customers details");
+                "2. Get all customers details\n" +
+                "3. Delete any one customer from database");
             int option = Convert.ToInt32(Console.ReadLine());
             switch (option)
             {
@@ -36,6 +37,14 @@ namespace Day21_ADO_NET_PracticeProblem
                 case 2:
                     CustomerRepo.GetAllCustomer();
 
+                    break;
+                case 3:
+                    Console.WriteLine("Enter Customer name To delete Customer data");
+                    Customer customer1 = new Customer()
+                    {
+                        Name = Console.ReadLine(),
+                    };
+                    CustomerRepo.DeleteCustomer(customer1);
                     break;
                 default:
                     Console.WriteLine("Please Select Correct Option");

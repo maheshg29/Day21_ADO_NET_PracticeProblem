@@ -59,5 +59,25 @@ namespace Day21_ADO_NET_PracticeProblem
                 }
             }
         }
+
+        public static void DeleteCustomer(Customer model)
+        {
+
+            SqlConnection sqlConnection = new SqlConnection(connectionString);
+
+            SqlCommand cmd = new SqlCommand("spDeleteCustomer", sqlConnection);
+            cmd.CommandType = CommandType.StoredProcedure;
+            sqlConnection.Open();
+            cmd.Parameters.AddWithValue("@Name", model.Name);
+            int num = cmd.ExecuteNonQuery();
+            if (num != 0)
+            {
+                Console.WriteLine("Customer Delete Successfully");
+            }
+            else
+            {
+                Console.WriteLine("Something went Wrong in Delete Customer");
+            }
+        }
     }
 }
