@@ -1,0 +1,39 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Day21_ADO_NET_PracticeProblem
+{
+    public class CustomerRepo
+    {
+        public static string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Day21_ADOdotNET;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+
+        public static void AddCustomer(Customer model)
+        {
+            SqlConnection sqlConnection = new SqlConnection(connectionString);
+
+            SqlCommand cmd = new SqlCommand("spAddCustomer", sqlConnection);
+            cmd.CommandType = CommandType.StoredProcedure;
+            sqlConnection.Open();
+            cmd.Parameters.AddWithValue("@Name", model.Name);
+            cmd.Parameters.AddWithValue("@City", model.City);
+            cmd.Parameters.AddWithValue("@Address", model.Address);
+            cmd.Parameters.AddWithValue("@Phone", model.Phone);
+            cmd.Parameters.AddWithValue("@Salary", model.Salary);
+
+            int num = cmd.ExecuteNonQuery();
+            if (num != 0)
+            {
+                Console.WriteLine("Customer added Successfully");
+            }
+            else
+            {
+                Console.WriteLine("Something went Wrong");
+            }
+        }
+    }
+}

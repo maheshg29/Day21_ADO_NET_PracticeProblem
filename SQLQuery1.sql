@@ -1,0 +1,2 @@
+create database Day21_ADOdotNET
+use Day21_ADOdotNET
